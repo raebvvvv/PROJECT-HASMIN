@@ -42,8 +42,8 @@ if (isset($_GET['logout'])) {
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a href="user_home.php" class="nav-link text-dark">Home</a></li>
-                            <li class="nav-item"><a href="" class="nav-link text-dark fw-bold">About Us</a></li>
-                            <li class="nav-item"><a href="" class="nav-link text-dark">Borrow Tools</a></li>
+                            <li class="nav-item"><a href="user_about.php" class="nav-link text-dark fw-bold">About Us</a></li>
+                            <li class="nav-item"><a href="index.php" class="nav-link text-dark">Borrow Tools</a></li>
                             <li class="nav-item"><a href="user_contact.php" class="nav-link text-dark">Contact</a></li>
                         </ul>
                         <a href="?logout=true" class="btn btn-primary rounded-pill px-4">Logout</a>
