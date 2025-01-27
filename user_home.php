@@ -44,7 +44,7 @@ if (isset($_GET['logout'])) {
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a href="user_home.php" class="nav-link text-dark fw-bold">Home</a></li>
                             <li class="nav-item"><a href="user_about.php" class="nav-link text-dark">About Us</a></li>
-                            <li class="nav-item"><a href="index.html" class="nav-link text-dark">Borrow Tools</a></li>
+                            <li class="nav-item"><a href="index.php" class="nav-link text-dark">Borrow Tools</a></li>
                             <li class="nav-item"><a href="user_contact.php" class="nav-link text-dark">Contact</a></li>
                         </ul>
                         <a href="?logout=true" class="btn btn-primary rounded-pill px-4">Logout</a>
