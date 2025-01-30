@@ -1,3 +1,7 @@
+<?php 
+session_start();
+$isLoggedIn = isset($_SESSION['user_id']); // Check if user is logged in
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +35,11 @@
                             <li class="nav-item"><a href="index.php" class="nav-link text-dark">Borrow Tools</a></li>
                             <li class="nav-item"><a href="user_contact.php" class="nav-link text-dark">Contact</a></li>
                         </ul>
+                        <?php if ($isLoggedIn): ?>
                         <a href="?logout=true" class="btn btn-primary rounded-pill px-4">Logout</a>
+                    <?php else: ?>
+                        <a href="login.php" class="btn btn-outline-primary rounded-pill px-4">Login</a>
+                    <?php endif; ?>
                     </div>
                 </div>
             </nav>
@@ -119,3 +127,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<?php
+// Logout logic
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header("Location: index.php"); // Redirect to homepage after logout
+    exit();
+}
+?>
