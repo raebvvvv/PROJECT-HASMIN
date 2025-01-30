@@ -31,7 +31,11 @@
                             <li class="nav-item"><a href="index.php" class="nav-link text-dark">Borrow Tools</a></li>
                             <li class="nav-item"><a href="user_contact.php" class="nav-link text-dark">Contact</a></li>
                         </ul>
+                        <?php if ($isLoggedIn): ?>
                         <a href="?logout=true" class="btn btn-primary rounded-pill px-4">Logout</a>
+                    <?php else: ?>
+                        <a href="login.php" class="btn btn-outline-primary rounded-pill px-4">Login</a>
+                    <?php endif; ?>
                     </div>
                 </div>
             </nav>
