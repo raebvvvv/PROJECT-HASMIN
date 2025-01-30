@@ -1,4 +1,7 @@
-
+<?php 
+session_start();
+$isLoggedIn = isset($_SESSION['user_id']); // Check if user is logged in
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
