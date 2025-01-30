@@ -1,15 +1,10 @@
 <?php
+// Start the session
 session_start();
 
 // Check if the user is logged in
-if (!isset($_SESSION['user_logged_in']) || $_SESSION['user_logged_in'] !== true) {
-    header("Location: login.php");
-    exit();
-}
-
-// Handle logout
-if (isset($_GET['logout'])) {
-    session_destroy();
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to the login page if not logged in
     header("Location: login.php");
     exit();
 }
