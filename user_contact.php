@@ -1,7 +1,38 @@
+
 <?php 
 session_start();
 $isLoggedIn = isset($_SESSION['user_id']); // Check if user is logged in
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get form data
+    $name = htmlspecialchars($_POST['name']);
+    $email = htmlspecialchars($_POST['email']);
+    $subject = htmlspecialchars($_POST['subject']);
+    $message = htmlspecialchars($_POST['message']);
+
+    // Database connection
+    $servername = "localhost";
+    $username = "root"; // Replace with your database username
+    $password = ""; // Replace with your database password
+    $dbname = "hasmin_users";
+
+    try {
+        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Insert the contact message into the database
+        $stmt = $pdo->prepare("INSERT INTO contact_messages (name, email, subject, message) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$name, $email, $subject, $message]);
+
+        // Optionally, you can send an email confirmation or notify the admin here
+        $messageSent = "Thank you for reaching out! Your message has been sent.";
+    } catch (PDOException $e) {
+        $error = "Error: " . $e->getMessage();
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,32 +87,38 @@ $isLoggedIn = isset($_SESSION['user_id']); // Check if user is logged in
     </section>
 
     <!-- Contact Form Section -->
-    <div class="container my-5">
-        <div class="row">
-            <!-- Contact Form -->
-            <div class="col-md-6">
-                <h2 class="fw-bold mb-4">Send Us a Message</h2>
-                <form>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Your Full Name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Your Email Address" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="subject" class="form-label">Subject</label>
-                        <input type="text" class="form-control" id="subject" placeholder="Subject" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" rows="4" placeholder="Your Message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary px-4">Send Message</button>
-                </form>
-            </div>
+    <<div class="container my-5">
+    <div class="row">
+        <!-- Contact Form -->
+        <div class="col-md-6">
+            <h2 class="fw-bold mb-4">Send Us a Message</h2>
 
+            <?php if (isset($messageSent)): ?>
+                <div class="alert alert-success"><?php echo $messageSent; ?></div>
+            <?php elseif (isset($error)): ?>
+                <div class="alert alert-danger"><?php echo $error; ?></div>
+            <?php endif; ?>
+
+            <form method="POST" action="user_contact.php">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Your Full Name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Your Email Address" required>
+                </div>
+                <div class="mb-3">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" name="message" rows="4" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary px-4">Send Message</button>
+            </form>
+        </div>
             <!-- Contact Details -->
             <div class="col-md-6">
                 <h2 class="fw-bold mb-4">Contact Details</h2>
