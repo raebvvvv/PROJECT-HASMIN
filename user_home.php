@@ -103,7 +103,7 @@ if (isset($_GET['logout'])) {
     <div class="container">
         <h2 class="fw-bold mb-4">Start Borrowing Kitchen Tools Today</h2>
         <p class="text-muted mb-4">Explore our kitchen tools and make your cooking hassle-free.</p>
-        <a href="inventory.html" class="btn btn-primary px-4 py-2 rounded-pill">Browse Inventory</a>
+        <a href="index.php" class="btn btn-primary px-4 py-2 rounded-pill">Browse Inventory</a>
     </div>
 </section>
 
