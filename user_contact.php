@@ -1,4 +1,7 @@
-
+<?php 
+session_start();
+$isLoggedIn = isset($_SESSION['user_id']); // Check if user is logged in
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +38,7 @@
                         <a href="?logout=true" class="btn btn-primary rounded-pill px-4">Logout</a>
                     <?php else: ?>
                         <a href="login.php" class="btn btn-outline-primary rounded-pill px-4">Login</a>
-                    <?php endif; ?>>
+                    <?php endif; ?>
                     </div>
                 </div>
             </nav>
